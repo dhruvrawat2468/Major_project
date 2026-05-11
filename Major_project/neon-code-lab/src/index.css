@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Deep space navy background */
+    --background: 222 50% 6%;
+    --foreground: 210 100% 95%;
+
+    /* Glass card with slight transparency */
+    --card: 222 40% 10%;
+    --card-foreground: 210 100% 95%;
+
+    --popover: 222 40% 10%;
+    --popover-foreground: 210 100% 95%;
+
+    /* Neon blue primary */
+    --primary: 197 100% 50%;
+    --primary-foreground: 222 50% 6%;
+
+    /* Purple secondary */
+    --secondary: 262 67% 60%;
+    --secondary-foreground: 210 100% 95%;
+
+    /* Muted glass surfaces */
+    --muted: 222 35% 15%;
+    --muted-foreground: 210 40% 70%;
+
+    /* Hot pink accent */
+    --accent: 320 100% 65%;
+    --accent-foreground: 222 50% 6%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 100% 95%;
+
+    /* Neon borders with subtle glow */
+    --border: 222 30% 20%;
+    --input: 222 30% 20%;
+    --ring: 197 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Gradient stops */
+    --gradient-start: 197 100% 50%;  /* #00B4FF */
+    --gradient-end: 262 67% 60%;     /* #7C4DFF */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background: radial-gradient(ellipse at top, hsl(222 50% 8%), hsl(222 50% 6%));
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  /* Glass morphism effect */
+  .glass {
+    background: hsl(var(--card) / 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.3);
+  }
+
+  /* Neon glow effects */
+  .glow-blue {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.1);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px hsl(var(--secondary) / 0.3), 0 0 40px hsl(var(--secondary) / 0.1);
+  }
+
+  .glow-pink {
+    box-shadow: 0 0 20px hsl(var(--accent) / 0.3), 0 0 40px hsl(var(--accent) / 0.1);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Gradient border */
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
